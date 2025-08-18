@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .calendar-event {
+    font-size: 0.75rem; /* text-xs */
+    padding-left: 0.25rem; /* px-1 */
+    padding-right: 0.25rem; /* px-1 */
+    padding-top: 0.125rem; /* py-0.5 */
+    padding-bottom: 0.125rem; /* py-0.5 */
+    margin-top: 0.125rem; /* mt-0.5 */
+    border-radius: 0.125rem; /* rounded-sm */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    background-color: #bfdbfe; /* bg-blue-200 */
+    color: #1e40af; /* text-blue-800 */
+  }
+  
+  .calendar-event:hover {
+    background-color: #93c5fd; /* hover:bg-blue-300 */
+  }
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
