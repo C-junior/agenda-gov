@@ -3,7 +3,7 @@
     <div 
       v-for="event in sortedEvents" 
       :key="event.id" 
-      class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-transform duration-300"
+      class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out"
     >
       <div class="flex">
         <div class="w-24 bg-tocantins-blue text-white flex flex-col items-center justify-center p-4 text-center">

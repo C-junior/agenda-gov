@@ -7,11 +7,11 @@
       <div 
         v-for="day in calendarDays" 
         :key="day.date.toISOString()" 
-        class="relative border-r border-b h-24 sm:h-32 p-2" 
+        class="calendar-day p-2" 
         :class="{'bg-gray-50 text-gray-400': !day.isCurrentMonth, 'font-bold': day.isToday}"
       >
         <span 
-          :class="{'bg-tocantins-blue text-white rounded-full flex items-center justify-center w-7 h-7': day.isToday}"
+          :class="{'calendar-today': day.isToday}"
         >
           {{ day.date.getDate() }}
         </span>
@@ -20,7 +20,7 @@
             v-for="event in day.events" 
             :key="event.id" 
             @click="$emit('open-event', event)"
-            class="bg-blue-200 text-blue-800 calendar-event"
+            class="calendar-event"
           >
             {{ event.time }} - {{ event.title }}
           </div>

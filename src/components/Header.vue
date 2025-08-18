@@ -12,7 +12,7 @@
       </div>
       <button 
         @click="$emit('open-modal')" 
-        class="bg-tocantins-yellow text-tocantins-blue font-bold py-2 px-4 rounded-lg shadow-md hover:bg-tocantins-yellow-dark transition duration-300 flex items-center"
+        class="bg-tocantins-yellow text-tocantins-blue font-bold py-2 px-4 rounded-lg shadow-md hover:bg-tocantins-yellow-dark transition duration-300 ease-in-out transform hover:scale-105 flex items-center"
       >
         <i class="fas fa-plus mr-2"></i>
         <span class="hidden sm:inline">Adicionar Evento</span>

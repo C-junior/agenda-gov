@@ -20,7 +20,7 @@
             v-for="event in day.events" 
             :key="event.id" 
             @click="$emit('open-event', event)"
-            class="bg-blue-100 p-2 rounded-lg cursor-pointer hover:bg-blue-200"
+            class="bg-blue-100 p-2 rounded-lg cursor-pointer hover:bg-blue-200 transition-colors duration-200"
           >
             <p class="font-bold text-sm text-gray-800">{{ event.title }}</p>
             <p class="text-xs text-gray-600">{{ event.time }} - {{ event.location }}</p>
