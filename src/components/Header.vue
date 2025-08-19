@@ -3,7 +3,8 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
       <div class="flex items-center">
         <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mr-4">
-          <i class="fas fa-star text-tocantins-yellow text-2xl"></i>
+          <!-- <i class="fas fa-star text-tocantins-yellow text-2xl"></i> -->
+           <img src="../../public/brasao_to.png" class="bg-tocantins-blue" alt="">
         </div>
         <div>
           <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">Agenda Oficial</h1>
