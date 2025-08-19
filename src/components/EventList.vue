@@ -6,7 +6,7 @@
       class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out"
     >
       <div class="flex">
-        <div class="w-24 bg-tocantins-blue text-white flex flex-col items-center justify-center p-4 text-center">
+        <div class="w-24 bg-linear-to-r from-bg-tocantins-yellow to-bg-tocantins-blue text-white flex flex-col items-center justify-center p-4 text-center">
           <span class="text-4xl font-bold">{{ getDay(event.date) }}</span>
           <span class="text-sm uppercase">{{ getMonthShort(event.date) }}</span>
           <span class="text-xs">{{ getYear(event.date) }}</span>
