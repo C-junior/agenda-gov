@@ -1,0 +1,21 @@
+{
+  "name": "AgendaGov",
+  "short_name": "AgendaGov",
+  "description": "Aplicativo para gerenciar compromissos governamentais",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#00529F",
+  "icons": [
+    {
+      "src": "brasao_to.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "brasao_to.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
