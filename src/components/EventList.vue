@@ -3,7 +3,8 @@
     <div 
       v-for="event in sortedEvents" 
       :key="event.id" 
-      class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out"
+      @click="$emit('open-event', event)"
+      class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out cursor-pointer"
     >
       <div class="flex">
         <div class="w-24 text-white flex flex-col items-center justify-center p-4 text-center" style="background: linear-gradient(310deg,rgba(0, 82, 159, 1) 0%, rgba(255, 199, 44, 1) 100%);">
@@ -38,6 +39,7 @@ export default {
       required: true
     }
   },
+  emits: ['open-event'],
   computed: {
     sortedEvents() {
       return [...this.events].sort((a, b) => new Date(`${a.date}T${a.time}`) - new Date(`${b.date}T${b.time}`))

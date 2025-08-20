@@ -57,6 +57,7 @@
       <EventList 
         v-if="!isLoading && view === 'list' && events.length > 0" 
         :events="events" 
+        @open-event="openEventModal"
       />
 
       <!-- DAY VIEW -->
