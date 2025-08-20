@@ -15,11 +15,11 @@
             Lista
           </button>
           <button 
-            @click="view = 'week'" 
-            :class="{'bg-tocantins-blue text-white': view === 'week', 'text-gray-600': view !== 'week'}" 
+            @click="view = 'day'" 
+            :class="{'bg-tocantins-blue text-white': view === 'day', 'text-gray-600': view !== 'day'}" 
             class="px-3 py-1 rounded-md text-sm font-medium transition-colors"
           >
-            Semana
+            Dia
           </button>
           <button 
             @click="view = 'month'" 
@@ -59,8 +59,17 @@
         :events="events" 
       />
 
-      <!-- CALENDAR VIEWS (WEEK/MONTH) -->
-      <div v-if="!isLoading && (view === 'month' || view === 'week') && !error">
+      <!-- DAY VIEW -->
+      <CalendarDay 
+        v-if="!isLoading && view === 'day' && !error"
+        :current-date="currentDate" 
+        :events="events"
+        @open-event="openEventModal"
+        @change-day="changeDay"
+      />
+
+      <!-- MONTH VIEW -->
+      <div v-if="!isLoading && view === 'month' && !error">
         <!-- Calendar Header -->
         <div class="flex items-center justify-between mb-4 bg-white p-3 rounded-lg shadow">
           <button 
@@ -78,17 +87,7 @@
           </button>
         </div>
 
-        <!-- MONTH VIEW -->
         <CalendarMonth 
-          v-if="view === 'month'" 
-          :current-date="currentDate" 
-          :events="events"
-          @open-event="openEventModal"
-        />
-
-        <!-- WEEK VIEW -->
-        <CalendarWeek 
-          v-if="view === 'week'" 
           :current-date="currentDate" 
           :events="events"
           @open-event="openEventModal"
@@ -115,7 +114,7 @@ import AppHeader from './components/Header.vue'
 import AppFooter from './components/Footer.vue'
 import EventList from './components/EventList.vue'
 import CalendarMonth from './components/CalendarMonth.vue'
-import CalendarWeek from './components/CalendarWeek.vue'
+import CalendarDay from './components/CalendarDay.vue'
 import EventModal from './components/EventModal.vue'
 import LoadingSpinner from './components/LoadingSpinner.vue'
 
@@ -126,14 +125,14 @@ export default {
     AppFooter,
     EventList,
     CalendarMonth,
-    CalendarWeek,
+    CalendarDay,
     EventModal,
     LoadingSpinner
   },
   setup() {
     const { events, isLoading, error, addEvent, fetchEvents } = useEvents()
     
-    const view = ref('list') // 'list', 'week', 'month'
+    const view = ref('list') // 'list', 'day', 'month'
     const currentDate = ref(new Date())
     const showModal = ref(false)
     const selectedEvent = ref(null)
@@ -141,12 +140,6 @@ export default {
     const currentPeriodLabel = computed(() => {
       if (view.value === 'month') {
         return currentDate.value.toLocaleString('pt-BR', { month: 'long', year: 'numeric' })
-      }
-      if (view.value === 'week') {
-        const startOfWeek = getStartOfWeek(currentDate.value)
-        const endOfWeek = new Date(startOfWeek)
-        endOfWeek.setDate(endOfWeek.getDate() + 6)
-        return `${formatDate(startOfWeek)} - ${formatDate(endOfWeek)}`
       }
       return ''
     })
@@ -176,21 +169,14 @@ export default {
       const newDate = new Date(currentDate.value)
       if (view.value === 'month') {
         newDate.setMonth(newDate.getMonth() + direction)
-      } else if (view.value === 'week') {
-        newDate.setDate(newDate.getDate() + (7 * direction))
       }
       currentDate.value = newDate
     }
     
-    const getStartOfWeek = (date) => {
-      const dt = new Date(date)
-      const day = dt.getDay()
-      const diff = dt.getDate() - day + (day === 0 ? -6 : 0) // Adjust to start on Sunday
-      return new Date(dt.setDate(diff))
-    }
-    
-    const formatDate = (date) => {
-      return date.toLocaleDateString('pt-BR')
+    const changeDay = (direction) => {
+      const newDate = new Date(currentDate.value)
+      newDate.setDate(newDate.getDate() + direction)
+      currentDate.value = newDate
     }
     
     return {
@@ -205,7 +191,8 @@ export default {
       toggleModal,
       openEventModal,
       handleAddEvent,
-      changePeriod
+      changePeriod,
+      changeDay
     }
   }
 }
