@@ -21,13 +21,6 @@
           >
             Dia
           </button>
-          <!-- <button 
-            @click="view = 'month'" 
-            :class="{'bg-tocantins-blue text-white': view === 'month', 'text-gray-600': view !== 'month'}" 
-            class="px-3 py-1 rounded-md text-sm font-medium transition-colors"
-          >
-            Mês
-          </button> -->
         </div>
       </div>
 
@@ -68,32 +61,6 @@
         @open-event="openEventModal"
         @change-day="changeDay"
       />
-
-      <!-- MONTH VIEW -->
-      <div v-if="!isLoading && view === 'month' && !error">
-        <!-- Calendar Header -->
-        <div class="flex items-center justify-between mb-4 bg-white p-3 rounded-lg shadow">
-          <button 
-            @click="changePeriod(-1)" 
-            class="p-2 rounded-full hover:bg-gray-200 transition-colors"
-          >
-            <i class="fas fa-chevron-left"></i>
-          </button>
-          <h3 class="text-xl font-semibold text-tocantins-blue">{{ currentPeriodLabel }}</h3>
-          <button 
-            @click="changePeriod(1)" 
-            class="p-2 rounded-full hover:bg-gray-200 transition-colors"
-          >
-            <i class="fas fa-chevron-right"></i>
-          </button>
-        </div>
-
-        <CalendarMonth 
-          :current-date="currentDate" 
-          :events="events"
-          @open-event="openEventModal"
-        />
-      </div>
     </main>
 
     <AppFooter />
@@ -109,12 +76,11 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useEvents } from '../composables/useEvents'
 import AppHeader from '../components/Header.vue'
 import AppFooter from '../components/Footer.vue'
 import EventList from '../components/EventList.vue'
-import CalendarMonth from '../components/CalendarMonth.vue'
 import CalendarDay from '../components/CalendarDay.vue'
 import EventModal from '../components/EventModal.vue'
 import LoadingSpinner from '../components/LoadingSpinner.vue'
@@ -125,7 +91,6 @@ export default {
     AppHeader,
     AppFooter,
     EventList,
-    CalendarMonth,
     CalendarDay,
     EventModal,
     LoadingSpinner
@@ -133,17 +98,10 @@ export default {
   setup() {
     const { events, isLoading, error, addEvent, fetchEvents } = useEvents()
     
-    const view = ref('list') // 'list', 'day', 'month'
+    const view = ref('list') // 'list', 'day'
     const currentDate = ref(new Date())
     const showModal = ref(false)
     const selectedEvent = ref(null)
-    
-    const currentPeriodLabel = computed(() => {
-      if (view.value === 'month') {
-        return currentDate.value.toLocaleString('pt-BR', { month: 'long', year: 'numeric' })
-      }
-      return ''
-    })
     
     const toggleModal = () => {
       showModal.value = !showModal.value
@@ -166,14 +124,6 @@ export default {
       }
     }
     
-    const changePeriod = (direction) => {
-      const newDate = new Date(currentDate.value)
-      if (view.value === 'month') {
-        newDate.setMonth(newDate.getMonth() + direction)
-      }
-      currentDate.value = newDate
-    }
-    
     const changeDay = (direction) => {
       const newDate = new Date(currentDate.value)
       newDate.setDate(newDate.getDate() + direction)
@@ -188,11 +138,9 @@ export default {
       currentDate,
       showModal,
       selectedEvent,
-      currentPeriodLabel,
       toggleModal,
       openEventModal,
       handleAddEvent,
-      changePeriod,
       changeDay
     }
   }
