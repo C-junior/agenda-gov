@@ -44,6 +44,17 @@ src/
 └── main.js           # Ponto de entrada da aplicação
 ```
 
+## Deploy no Vercel
+
+Este projeto está configurado para deploy no Vercel como um PWA (Progressive Web App).
+
+1. Conecte seu repositório ao Vercel
+2. Configure as variáveis de ambiente necessárias para o Firebase (se aplicável)
+3. O Vercel irá automaticamente detectar o projeto Vue e fazer o build
+4. O projeto será servido com as configurações de PWA
+
+As configurações de rewrite estão incluídas no arquivo `vercel.json` para garantir que o roteamento do Vue Router funcione corretamente.
+
 ## Personalização da configuração
 
 Veja [Vite Configuration Reference](https://vitejs.dev/config/) para mais informações.
