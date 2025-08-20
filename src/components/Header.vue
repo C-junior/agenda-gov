@@ -21,7 +21,7 @@
           <i class="fas fa-plus mr-2"></i>
           <span class="hidden sm:inline">Adicionar Evento</span>
         </button>
-        <div v-if="user" class="flex items-center">
+        <div v-if="user" class="flex items-center z-20">
           <span class="text-white mr-4">{{ user.email }}</span>
           <button @click="handleLogout" class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-red-700 transition duration-300 ease-in-out">
             Sair
