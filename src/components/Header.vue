@@ -12,20 +12,37 @@
           <p class="text-sm sm:text-base text-gray-200 pb-4">Governador do Estado do Tocantins</p>
         </div>
       </div>
-      <!-- <button 
-        @click="$emit('open-modal')" 
-        class="bg-tocantins-yellow text-tocantins-blue font-bold py-2 px-4 rounded-lg shadow-md hover:bg-tocantins-yellow-dark transition duration-300 ease-in-out transform hover:scale-105 flex items-center"
-      >
-        <i class="fas fa-plus mr-2"></i>
-        <span class="hidden sm:inline">Adicionar Evento</span>
-      </button> -->
+      <div class="flex items-center">
+        <button 
+          v-if="isRegister"
+          @click="$emit('open-modal')" 
+          class="bg-tocantins-yellow text-tocantins-blue font-bold py-2 px-4 rounded-lg shadow-md hover:bg-tocantins-yellow-dark transition duration-300 ease-in-out transform hover:scale-105 flex items-center mr-4"
+        >
+          <i class="fas fa-plus mr-2"></i>
+          <span class="hidden sm:inline">Adicionar Evento</span>
+        </button>
+        <div v-if="user" class="flex items-center">
+          <span class="text-white mr-4">{{ user.email }}</span>
+          <button @click="handleLogout" class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-red-700 transition duration-300 ease-in-out">
+            Sair
+          </button>
+        </div>
+      </div>
     </div>
   </header>
 </template>
 
-<script>
-export default {
-  name: 'AppHeader',
-  emits: ['open-modal']
+<script setup>
+import { useAuth } from '../composables/useAuth'
+import { useRouter } from 'vue-router'
+
+const { user, isRegister, logout } = useAuth()
+const router = useRouter()
+
+defineEmits(['open-modal'])
+
+const handleLogout = async () => {
+  await logout()
+  router.push('/login')
 }
 </script>
