@@ -21,13 +21,13 @@
           >
             Dia
           </button>
-          <button 
+          <!-- <button 
             @click="view = 'month'" 
             :class="{'bg-tocantins-blue text-white': view === 'month', 'text-gray-600': view !== 'month'}" 
             class="px-3 py-1 rounded-md text-sm font-medium transition-colors"
           >
             Mês
-          </button>
+          </button> -->
         </div>
       </div>
 
