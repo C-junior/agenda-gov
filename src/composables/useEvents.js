@@ -3,12 +3,12 @@ import { initializeApp } from 'firebase/app'
 import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBCWO9zD-IFn321eG68Z0YIOp9p1nw2RJE",
-  authDomain: "agendagov-bb69e.firebaseapp.com",
-  projectId: "agendagov-bb69e",
-  storageBucket: "agendagov-bb69e.firebasestorage.app",
-  messagingSenderId: "144147215963",
-  appId: "1:144147215963:web:ec435d38a495e42653b17e"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 }
 
 // Initialize Firebase

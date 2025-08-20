@@ -58,7 +58,7 @@ export default {
 </script>
 <style scoped>
 .divider_event {
-  width: 60px;
+  width: 80px;
   height: 2px;
   background: linear-gradient(310deg,rgba(0, 82, 159, 1) 0%, rgba(255, 199, 44, 1) 100%);
   position: relative ;
