@@ -7,12 +7,12 @@
       class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ease-in-out cursor-pointer"
     >
       <div class="flex">
-        <div class="w-24 text-white flex flex-col items-center justify-center p-4 text-center" style="background: linear-gradient(310deg,rgba(0, 82, 159, 1) 0%, rgba(255, 199, 44, 1) 100%);">
+        <div class="w-24 text-white flex flex-col items-center justify-center p-4 text-center " style="background: linear-gradient(310deg,rgba(0, 82, 159, 1) 0%, rgba(255, 199, 44, 1) 100%);">
           <span class="text-4xl font-bold">{{ getDay(event.date) }}</span>
           <span class="text-sm uppercase">{{ getMonthShort(event.date) }}</span>
           <span class="text-xs">{{ getYear(event.date) }}</span>
         </div>
-        <div class="p-4 sm:p-6 flex-grow">
+        <div class="p-4 sm:p-6 flex-1">
           <div class="flex justify-between items-start">
             <h3 class="text-xl font-bold text-gray-900 mb-1">{{ event.title }}</h3>
             <span class="bg-blue-100 text-tocantins-blue text-xs font-semibold px-2.5 py-0.5 rounded-full">{{ event.time }}</span>
@@ -82,4 +82,5 @@ export default {
   margin: 6px;
   
 }
+
 </style>
