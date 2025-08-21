@@ -12,34 +12,42 @@
             <p class="text-sm text-gray-200">Governador do Estado do Tocantins</p>
           </div>
         </div>
-        <!-- Mobile menu button for smaller screens when logged in -->
-        <div class="md:hidden" v-if="user">
+        <!-- Mobile buttons for smaller screens when logged in -->
+        <div class="md:hidden flex items-center gap-2" v-if="user && isRegister">
           <button 
-            @click="mobileMenuOpen = !mobileMenuOpen"
-            class="text-white p-2 rounded-md hover:bg-tocantins-blue-dark"
+            @click="$emit('open-modal')" 
+            class="bg-tocantins-yellow text-tocantins-blue font-bold p-2 rounded-lg shadow-md hover:bg-tocantins-yellow-dark transition duration-300 ease-in-out transform hover:scale-105 flex items-center"
           >
-            <i class="fas fa-user-circle text-2xl"></i>
+            <i class="fas fa-plus"></i>
           </button>
         </div>
       </div>
       
-      <div 
-        class="flex flex-col sm:flex-row items-center gap-2 w-full md:w-auto"
-        :class="{'hidden md:flex': user && !mobileMenuOpen}"
-      >
+      <div class="flex flex-col sm:flex-row items-center gap-2 w-full md:w-auto">
         <button 
           v-if="isRegister"
           @click="$emit('open-modal')" 
-          class="bg-tocantins-yellow text-tocantins-blue font-bold py-2 px-4 rounded-lg shadow-md hover:bg-tocantins-yellow-dark transition duration-300 ease-in-out transform hover:scale-105 flex items-center w-full sm:w-auto justify-center"
+          class="hidden md:block bg-tocantins-yellow text-tocantins-blue font-bold py-2 px-4 rounded-lg shadow-md hover:bg-tocantins-yellow-dark transition duration-300 ease-in-out transform hover:scale-105 flex items-center w-full sm:w-auto justify-center"
         >
           <i class="fas fa-plus mr-2"></i>
           <span>Adicionar Evento</span>
         </button>
-        <div v-if="user" class="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
-          <span class="text-white text-center py-2">{{ user.email }}</span>
+        <div v-if="user" class="flex items-center gap-2 justify-end w-full md:w-auto">
+          <div class="flex items-center gap-2 py-2 ">
+            <img 
+              v-if="user.photoURL" 
+              :src="user.photoURL" 
+              :alt="user.displayName || 'Usuário'" 
+              class="w-8 h-8 rounded-full object-cover"
+
+            >
+            <div class="hidden md:block">
+              <span class="text-white">{{ user.email }}</span>
+            </div>
+          </div>
           <button 
             @click="handleLogout" 
-            class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-red-700 transition duration-300 ease-in-out w-full sm:w-auto"
+            class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-red-700 transition duration-300 ease-in-out"
           >
             Sair
           </button>
