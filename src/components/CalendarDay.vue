@@ -75,7 +75,19 @@ export default {
       return this.events.filter(event => this.isSameDay(new Date(event.date + 'T00:00:00'), this.currentDate))
     },
     sortedDayEvents() {
-      return [...this.dayEvents].sort((a, b) => new Date(`${a.date}T${a.time}`) - new Date(`${b.date}T${b.time}`))
+      // Filter out events before today
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      const futureEvents = this.dayEvents.filter(event => {
+        const eventDate = new Date(event.date + 'T00:00:00');
+        return eventDate >= today;
+      });
+      
+      // Sort remaining events by time
+      return [...futureEvents].sort((a, b) => {
+        return new Date(`1970-01-01T${a.time}`) - new Date(`1970-01-01T${b.time}`);
+      });
     }
   },
   methods: {

@@ -42,18 +42,32 @@ export default {
   emits: ['open-event'],
   computed: {
     sortedEvents() {
-      return [...this.events].sort((a, b) => new Date(`${a.date}T${a.time}`) - new Date(`${b.date}T${b.time}`))
+      // Filter out events before today
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      const futureEvents = this.events.filter(event => {
+        const eventDate = new Date(event.date + 'T00:00:00');
+        return eventDate >= today;
+      });
+      
+      // Sort remaining events by date and time
+      return [...futureEvents].sort((a, b) => {
+        const dateA = new Date(`${a.date}T${a.time}`);
+        const dateB = new Date(`${b.date}T${b.time}`);
+        return dateA - dateB;
+      });
     }
   },
   methods: {
     getDay(dateString) {
-      return new Date(dateString + 'T00:00:00').getDate()
+      return new Date(dateString + 'T00:00:00').getDate();
     },
     getMonthShort(dateString) {
-      return new Date(dateString + 'T00:00:00').toLocaleString('pt-BR', { month: 'short' }).replace('.', '')
+      return new Date(dateString + 'T00:00:00').toLocaleString('pt-BR', { month: 'short' }).replace('.', '');
     },
     getYear(dateString) {
-      return new Date(dateString + 'T00:00:00').getFullYear()
+      return new Date(dateString + 'T00:00:00').getFullYear();
     }
   }
 }
