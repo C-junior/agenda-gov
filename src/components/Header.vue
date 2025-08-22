@@ -1,6 +1,6 @@
 <template>
   <header class="bg-tocantins-blue shadow-xl/30 pt-10 relative" style="background-image: url('/cerrado-hero.jpg'); background-position: bottom;">
-    <div class="absolute inset-0 bg-tocantins-blue opacity-30" style="background: linear-gradient(310deg,rgba(0, 82, 159, 1) 0%, rgba(255, 199, 44, 1) 100%);"></div>
+    <!-- <div class="absolute inset-0 bg-tocantins-blue opacity-30" style="background: linear-gradient(310deg,rgba(0, 82, 159, 1) 0%, rgba(255, 199, 44, 1) 100%);"></div> -->
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
       <div class="flex items-center w-full md:w-auto justify-between md:justify-start">
         <div class="flex items-center">
@@ -24,14 +24,26 @@
       </div>
       
       <div class="flex flex-col sm:flex-row items-center gap-2 w-full md:w-auto">
-        <button 
-          v-if="isRegister"
-          @click="$emit('open-modal')" 
-          class="hidden md:block bg-tocantins-yellow text-tocantins-blue font-bold py-2 px-4 rounded-lg shadow-md hover:bg-tocantins-yellow-dark transition duration-300 ease-in-out transform hover:scale-105 flex items-center w-full sm:w-auto justify-center"
-        >
-          <i class="fas fa-plus mr-2"></i>
-          <span>Adicionar Evento</span>
-        </button>
+        <div v-if="user" class="flex items-center gap-2">
+          <!-- Admin User Management Link -->
+          <router-link 
+            v-if="isAdmin" 
+            to="/users"
+            class="hidden md:block bg-purple-600 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 transition duration-300 ease-in-out mr-2"
+          >
+            <i class="fas fa-users mr-2"></i>Gerenciar Usuários
+          </router-link>
+          
+          <button 
+            v-if="isRegister"
+            @click="$emit('open-modal')" 
+            class="hidden md:block bg-tocantins-yellow text-tocantins-blue font-bold py-2 px-4 rounded-lg shadow-md hover:bg-tocantins-yellow-dark transition duration-300 ease-in-out transform hover:scale-105 flex items-center w-full sm:w-auto justify-center"
+          >
+            <i class="fas fa-plus mr-2"></i>
+            <span>Adicionar Evento</span>
+          </button>
+        </div>
+        
         <div v-if="user" class="flex items-center gap-2 justify-end w-full md:w-auto">
           <div class="flex items-center gap-2 py-2 ">
             <img 
@@ -54,6 +66,16 @@
         </div>
       </div>
     </div>
+    
+    <!-- Mobile Navigation for Admin -->
+    <div v-if="user && isAdmin" class="md:hidden container mx-auto px-4 pb-2 z-90">
+      <router-link 
+        to="/users"
+        class="  block bg-purple-600 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 transition duration-300 ease-in-out text-center"
+      >
+        <i class="fas fa-users mr-2"></i>Gerenciar Usuários
+      </router-link>
+    </div>
   </header>
 </template>
 
@@ -62,7 +84,7 @@ import { ref } from 'vue'
 import { useAuth } from '../composables/useAuth'
 import { useRouter } from 'vue-router'
 
-const { user, isRegister, logout } = useAuth()
+const { user, isRegister, isAdmin, logout } = useAuth()
 const router = useRouter()
 const mobileMenuOpen = ref(false)
 
