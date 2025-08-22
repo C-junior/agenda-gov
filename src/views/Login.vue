@@ -41,6 +41,7 @@
 
             </div>
           </div>
+          <img src="/ATI-logo.svg" alt="" class="w-24 mx-auto mb-4">
           
           <!-- <form class="space-y-4" @submit.prevent="handleEmailLogin">
             <div>
